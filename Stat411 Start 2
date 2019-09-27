@@ -1,0 +1,392 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "['append',\n",
+       " 'clear',\n",
+       " 'copy',\n",
+       " 'count',\n",
+       " 'extend',\n",
+       " 'index',\n",
+       " 'insert',\n",
+       " 'pop',\n",
+       " 'remove',\n",
+       " 'reverse',\n",
+       " 'sort']"
+      ]
+     },
+     "execution_count": 9,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "import numpy as np                   # Numerical computation library\n",
+    "import pandas as pa                  # Dataframe and Data manipulation Library\n",
+    "import matplotlib.pyplot as plt      # Basic plotting functionality Library\n",
+    "import seaborn as sn                 # Advanced Data visualization Library\n",
+    "\n",
+    "[x for x in dir(list) if not '__' in x]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 10,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "fifa = pa.read_csv('Desktop/FifaData.csv', low_memory=False)   # creates a pandas Dataframe from a .csv file\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 11,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style>\n",
+       "    .dataframe thead tr:only-child th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: left;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>Name</th>\n",
+       "      <th>Age</th>\n",
+       "      <th>Nationality</th>\n",
+       "      <th>Overall</th>\n",
+       "      <th>Potential</th>\n",
+       "      <th>Club</th>\n",
+       "      <th>Value</th>\n",
+       "      <th>Wage</th>\n",
+       "      <th>Special</th>\n",
+       "      <th>Acceleration</th>\n",
+       "      <th>...</th>\n",
+       "      <th>Short passing</th>\n",
+       "      <th>Shot power</th>\n",
+       "      <th>Sliding tackle</th>\n",
+       "      <th>Sprint speed</th>\n",
+       "      <th>Stamina</th>\n",
+       "      <th>Standing tackle</th>\n",
+       "      <th>Strength</th>\n",
+       "      <th>Vision</th>\n",
+       "      <th>Volleys</th>\n",
+       "      <th>Positions</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>Cristiano Ronaldo</td>\n",
+       "      <td>32</td>\n",
+       "      <td>Portugal</td>\n",
+       "      <td>94</td>\n",
+       "      <td>94</td>\n",
+       "      <td>Real Madrid CF</td>\n",
+       "      <td>€95.5M</td>\n",
+       "      <td>€565K</td>\n",
+       "      <td>2228</td>\n",
+       "      <td>89</td>\n",
+       "      <td>...</td>\n",
+       "      <td>83</td>\n",
+       "      <td>94</td>\n",
+       "      <td>23</td>\n",
+       "      <td>91</td>\n",
+       "      <td>92</td>\n",
+       "      <td>31</td>\n",
+       "      <td>80</td>\n",
+       "      <td>85</td>\n",
+       "      <td>88</td>\n",
+       "      <td>ST LW</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>L. Messi</td>\n",
+       "      <td>30</td>\n",
+       "      <td>Argentina</td>\n",
+       "      <td>93</td>\n",
+       "      <td>93</td>\n",
+       "      <td>FC Barcelona</td>\n",
+       "      <td>€105M</td>\n",
+       "      <td>€565K</td>\n",
+       "      <td>2154</td>\n",
+       "      <td>92</td>\n",
+       "      <td>...</td>\n",
+       "      <td>88</td>\n",
+       "      <td>85</td>\n",
+       "      <td>26</td>\n",
+       "      <td>87</td>\n",
+       "      <td>73</td>\n",
+       "      <td>28</td>\n",
+       "      <td>59</td>\n",
+       "      <td>90</td>\n",
+       "      <td>85</td>\n",
+       "      <td>RW</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>Neymar</td>\n",
+       "      <td>25</td>\n",
+       "      <td>Brazil</td>\n",
+       "      <td>92</td>\n",
+       "      <td>94</td>\n",
+       "      <td>Paris Saint-Germain</td>\n",
+       "      <td>€123M</td>\n",
+       "      <td>€280K</td>\n",
+       "      <td>2100</td>\n",
+       "      <td>94</td>\n",
+       "      <td>...</td>\n",
+       "      <td>81</td>\n",
+       "      <td>80</td>\n",
+       "      <td>33</td>\n",
+       "      <td>90</td>\n",
+       "      <td>78</td>\n",
+       "      <td>24</td>\n",
+       "      <td>53</td>\n",
+       "      <td>80</td>\n",
+       "      <td>83</td>\n",
+       "      <td>LW</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>L. Suárez</td>\n",
+       "      <td>30</td>\n",
+       "      <td>Uruguay</td>\n",
+       "      <td>92</td>\n",
+       "      <td>92</td>\n",
+       "      <td>FC Barcelona</td>\n",
+       "      <td>€97M</td>\n",
+       "      <td>€510K</td>\n",
+       "      <td>2291</td>\n",
+       "      <td>88</td>\n",
+       "      <td>...</td>\n",
+       "      <td>83</td>\n",
+       "      <td>87</td>\n",
+       "      <td>38</td>\n",
+       "      <td>77</td>\n",
+       "      <td>89</td>\n",
+       "      <td>45</td>\n",
+       "      <td>80</td>\n",
+       "      <td>84</td>\n",
+       "      <td>88</td>\n",
+       "      <td>ST</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>M. Neuer</td>\n",
+       "      <td>31</td>\n",
+       "      <td>Germany</td>\n",
+       "      <td>92</td>\n",
+       "      <td>92</td>\n",
+       "      <td>FC Bayern Munich</td>\n",
+       "      <td>€61M</td>\n",
+       "      <td>€230K</td>\n",
+       "      <td>1493</td>\n",
+       "      <td>58</td>\n",
+       "      <td>...</td>\n",
+       "      <td>55</td>\n",
+       "      <td>25</td>\n",
+       "      <td>11</td>\n",
+       "      <td>61</td>\n",
+       "      <td>44</td>\n",
+       "      <td>10</td>\n",
+       "      <td>83</td>\n",
+       "      <td>70</td>\n",
+       "      <td>11</td>\n",
+       "      <td>GK</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "<p>5 rows × 44 columns</p>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "                Name  Age Nationality  Overall  Potential  \\\n",
+       "0  Cristiano Ronaldo   32    Portugal       94         94   \n",
+       "1           L. Messi   30   Argentina       93         93   \n",
+       "2             Neymar   25      Brazil       92         94   \n",
+       "3          L. Suárez   30     Uruguay       92         92   \n",
+       "4           M. Neuer   31     Germany       92         92   \n",
+       "\n",
+       "                  Club   Value   Wage  Special Acceleration    ...     \\\n",
+       "0       Real Madrid CF  €95.5M  €565K     2228           89    ...      \n",
+       "1         FC Barcelona   €105M  €565K     2154           92    ...      \n",
+       "2  Paris Saint-Germain   €123M  €280K     2100           94    ...      \n",
+       "3         FC Barcelona    €97M  €510K     2291           88    ...      \n",
+       "4     FC Bayern Munich    €61M  €230K     1493           58    ...      \n",
+       "\n",
+       "  Short passing Shot power Sliding tackle Sprint speed Stamina  \\\n",
+       "0            83         94             23           91      92   \n",
+       "1            88         85             26           87      73   \n",
+       "2            81         80             33           90      78   \n",
+       "3            83         87             38           77      89   \n",
+       "4            55         25             11           61      44   \n",
+       "\n",
+       "  Standing tackle Strength Vision Volleys Positions  \n",
+       "0              31       80     85      88    ST LW   \n",
+       "1              28       59     90      85       RW   \n",
+       "2              24       53     80      83       LW   \n",
+       "3              45       80     84      88       ST   \n",
+       "4              10       83     70      11       GK   \n",
+       "\n",
+       "[5 rows x 44 columns]"
+      ]
+     },
+     "execution_count": 11,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "fifa.head()\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 12,
+   "metadata": {
+    "collapsed": true
+   },
+   "outputs": [],
+   "source": [
+    "#fifa['Acceleration'].replace(regex=True,inplace=True,to_replace=r'\\D',value=r'')\n",
+    "\n",
+    "X = np.array(fifa.loc[:, 'Age'])\n",
+    "Y = np.array(fifa.loc[:, 'Acceleration'])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 33,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array([ 89.,  92.,  94., ...,  66.,  57.,  48.])"
+      ]
+     },
+     "execution_count": 33,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "pa.to_numeric(Y, errors = 'coerce', downcast ='signed')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 32,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array([ 89.,  92.,  94., ...,  66.,  57.,  48.])"
+      ]
+     },
+     "execution_count": 32,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "Y"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 28,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array([32, 30, 25, ..., 17, 18, 18], dtype=int64)"
+      ]
+     },
+     "execution_count": 28,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "X"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 34,
+   "metadata": {
+    "collapsed": true
+   },
+   "outputs": [],
+   "source": [
+    "# Create some data\n",
+    "x = np.linspace(0, 10, 500)\n",
+    "y = np.cumsum(X, 0)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 35,
+   "metadata": {
+    "collapsed": true
+   },
+   "outputs": [],
+   "source": [
+    "plt.legend('Age', ncol=2, loc='upper left');"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": true
+   },
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.6.1"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}
