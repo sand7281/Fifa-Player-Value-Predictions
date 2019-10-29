@@ -1,0 +1,13 @@
+Cleaning our original to get ready for the group presentation on thursday
+  * What we need for thursday 
+    * Clean up our proposal and make our groups memebers familiar with our variables and what questions we are asking
+    * Bootstrap and cross validation for our current models - We need to apply these methods to ever model we currently have and then talk about
+      how well the model fits
+    * Make sure K-nearest neighbors works in the Group Presentation file has some colors
+    * Ridge and/or Lasso Regression for more than just two columns
+   
+   
+   * Challenges: We still have some columns that are not usable data types. We are able to use the columns Age, Overall, Potential, and Wage but nothing else.
+      We need to figure out how to control/adjust the colors for our models on certain devices
+   * Next steps: Apply decision tree models, Regression tree models, and Linear Discriminant Analysis. We need clean up more columns
+      so we can use more than just the 4 currently have
