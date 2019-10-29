@@ -5,7 +5,7 @@ Cleaning our original to get ready for the group presentation on thursday
       how well the model fits
     * Make sure K-nearest neighbors works in the Group Presentation file has some colors
     * Ridge and/or Lasso Regression for more than just two columns
-   
+    * Who is going to talk about what on thursday. Let the others know what you want to talk about or you will be assigned stuff to talk about
    
    * Challenges: We still have some columns that are not usable data types. We are able to use the columns Age, Overall, Potential, and Wage but nothing else.
       We need to figure out how to control/adjust the colors for our models on certain devices
